@@ -9,7 +9,7 @@ var storage = multer.diskStorage({
     cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-    cb(null, file.filename + "_" + Date.now() + "_" + file.originalname);
+    cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
   },
 });
 
@@ -37,7 +37,7 @@ router.post("/add", upload, (req, res) => {
       res.redirect("/");
     }
   });
-});
+}); 
 
 // router.get("/users", (req, res) => {
 //   res.send("All users");
