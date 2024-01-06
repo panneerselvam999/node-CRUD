@@ -30,14 +30,28 @@ router.post("/add", upload, (req, res) => {
     if (err) {
       res.json({ message: err.message, type: "danger" });
     } else {
-      req.session.message = { 
+      req.session.message = {
         type: "success",
         message: "User added successfully!",
       };
       res.redirect("/");
     }
   });
-}); 
+});
+
+//get all users route
+router.get("/", (req, res) => {
+  User.find().exec((err, users) => {
+    if (err) {
+      res.json({ message: err.message });
+    } else {
+      res.render("index", {
+        title: "Home Page",
+        users: users,
+      });
+    }
+  });
+});
 
 // router.get("/users", (req, res) => {
 //   res.send("All users");
